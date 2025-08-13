@@ -706,8 +706,9 @@ function escapeMarkdown(text) {
     return text;
   }
   
-  // Telegram Markdown 特殊字符需要转义
-  return text.replace(/[_*\[\]()~`>#+=|{}.!-]/g, '\\$&');
+  // 仅针对 Telegram 旧版 Markdown 必需字符进行转义，避免破坏 URL（如 https://baidu.com）
+  // 必需转义: _ * [ ] `
+  return text.replace(/[_*\[\]`]/g, '\\$&');
 }
 
 // 发送消息
